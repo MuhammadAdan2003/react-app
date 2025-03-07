@@ -1,0 +1,23 @@
+@import "tailwindcss";
+
+.custom-scrollbar::-webkit-scrollbar {
+    width: 8px;
+    /* Adjust width */
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+    background: #f3f4f6;
+    /* Tailwind's gray-100 */
+    border-radius: 10px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+    background: #9333ea;
+    /* Tailwind's purple-600 */
+    border-radius: 10px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: #7e22ce;
+    /* Darker purple on hover */
+}
