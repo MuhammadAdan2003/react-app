@@ -3,6 +3,7 @@ import UserContext from './UserContext';
 import App from '../App';
 
 const UserProvider = ({ children }) => {
+    const [editID, seteditID] = useState("")
     const [isOpen, setIsOpen] = useState(false);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [user, setUser] = useState('hassan');
@@ -18,7 +19,7 @@ const UserProvider = ({ children }) => {
         setUser(user === 'Hassan' ? 'Adan' : 'Hassan');
     };
     return (
-        <UserContext.Provider value={{ user, toggleUser, todo, setTodo, todos, setTodos, priority, setPriority, des, setdes, isModalOpen, setIsModalOpen, isOpen, setIsOpen }}>
+        <UserContext.Provider value={{ user, toggleUser, todo, setTodo, todos, setTodos, priority, setPriority, des, setdes, isModalOpen, setIsModalOpen, isOpen, setIsOpen, editID, seteditID }}>
             {children}
             {/* <App /> */}
         </UserContext.Provider>

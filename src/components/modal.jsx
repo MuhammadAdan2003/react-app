@@ -17,6 +17,8 @@ const Modal = () => {
         setdes,
         isModalOpen,
         setIsModalOpen,
+        editID,
+        seteditID
     } = useContext(UserProvider);
 
     const handleDes = (e) => {
@@ -59,7 +61,7 @@ const Modal = () => {
 
         const newTodos = [
             ...todos,
-            { id: uuidv4(), todo, isCompleted: false, priority, description: des },
+            { editID, id: uuidv4(), todo, isCompleted: false, priority, description: des },
         ];
         setTodos(newTodos);
         localStorage.setItem("todos", JSON.stringify(newTodos));

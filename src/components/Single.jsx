@@ -1,30 +1,14 @@
 import { useState, useEffect, useContext } from "react";
 import UserContext from "./UserContext";
 import Modal from "./modal"
+import { v4 as uuidv4 } from "uuid";
 
 const Single = () => {
     const [local, setLocal] = useState(() => {
         return JSON.parse(localStorage.getItem("todos")) || [];
     });
 
-    const { todo, setTodo, todos, setTodos, priority, setPriority, des, setdes, isModalOpen, setIsModalOpen, isOpen, setIsOpen } = useContext(UserContext);
-    // useEffect(() => {
-    //     function handleClickOutside(event) {
-    //         if (modalRef.current && !modalRef.current.contains(event.target)) {
-    //             setIsModalOpen(false);
-    //         }
-    //     }
-
-    //     if (isModalOpen) {
-    //         document.addEventListener("mousedown", handleClickOutside);
-    //     }
-
-    //     return () => {
-    //         document.removeEventListener("mousedown", handleClickOutside);
-    //     };
-    // },
-
-    //     [isModalOpen]);
+    const { todo, setTodo, todos, setTodos, priority, setPriority, des, setdes, isModalOpen, setIsModalOpen, isOpen, setIsOpen, editID, seteditID } = useContext(UserContext);
 
     useEffect(() => {
         localStorage.setItem("todos", JSON.stringify(local));
@@ -46,10 +30,10 @@ const Single = () => {
         setLocal(deleted);
     };
 
-    // const handleEditClick = (e) => {
-    //     e.stopPropagation(); // Prevents event from bubbling to the document
-    //     setIsModalOpen(true); // Open the modal
-    // };
+    const handleEdit = (e) => {
+        let editedValue = local.filter(item => item.id === e.target.id)
+        console.log(editedValue.editID);
+    }
 
     return (
         <div className={`${local.length > 0 ? "grid md:grid-cols-4 sm:grid-cols-2 grid-cols-1 w-full gap-6 p-6 bg-gray-900 h-1/2" : "w-full gap-6 p-6"}`}>
@@ -57,7 +41,7 @@ const Single = () => {
                 local.map((item) => (
                     <div
                         key={item.id}
-                        className="w-full max-w-md bg-gray-800 text-white p-6 rounded-lg shadow-xl transform hover:scale-105 transition duration-300"
+                        className="w-full flex flex-col justify-between max-w-md bg-gray-800 text-white p-6 rounded-lg shadow-xl transform hover:scale-105 transition duration-300"
                     >
                         <div className="flex justify-between items-center">
                             <h2 className="text-xl font-semibold mb-2 text-gray-100">
@@ -77,12 +61,15 @@ const Single = () => {
                         </p>
 
                         <div className="flex justify-end gap-2">
-                            <button onClick={() => {
-                                setIsModalOpen(true)
-                                setTodo(item.todo)
-                                setPriority(item.priority)
-                                setdes(item.description)
-                            }} className="bg-blue-500 text-sm text-white cursor-pointer px-4 py-1 rounded-lg hover:bg-blue-600 transition">
+                            <button
+                                id={item.id}
+                                onClick={(e) => {
+                                    setIsModalOpen(true)
+                                    setTodo(item.todo)
+                                    setPriority(item.priority)
+                                    setdes(item.description)
+                                    handleEdit(e)
+                                }} className="bg-blue-500 text-sm text-white cursor-pointer px-4 py-1 rounded-lg hover:bg-blue-600 transition">
                                 Edit
                             </button>
                             <button
