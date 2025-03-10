@@ -1,9 +1,6 @@
 import { useState, useEffect, useContext } from "react";
 import UserContext from "./UserContext";
 import Modal from "./modal"
-
-import { v4 as uuidv4 } from "uuid";
-
 const Single = () => {
     const [local, setLocal] = useState(() => {
         return JSON.parse(localStorage.getItem("todos")) || [];
@@ -33,16 +30,10 @@ const Single = () => {
 
     const handleEdit = (e) => {
         let editedValue = local.filter(item => item.id !== e.target.id)
-        // console.log(ed);        
         setLocal([...editedValue])
         seteditID(editID + 1)
         setmatched(e.target.id)
     }
-
-    useEffect(() => {
-        console.log(editID);
-        console.log(matched);
-    }, [editID, matched]);
 
     return (
         <div className={`${local.length > 0 ? "grid md:grid-cols-4 sm:grid-cols-2 grid-cols-1 w-full gap-6 p-6 bg-gray-900 h-1/2" : "w-full gap-6 p-6"}`}>
@@ -52,22 +43,25 @@ const Single = () => {
                         key={item.id}
                         className="w-full flex flex-col justify-between max-w-md bg-gray-800 text-white p-6 rounded-lg shadow-xl transform hover:scale-105 transition duration-300"
                     >
-                        <div className="flex justify-between items-center">
-                            <h2 className="text-xl font-semibold mb-2 text-gray-100">
-                                {item.todo}
-                            </h2>
-                            <span
-                                className={`inline-block text-[10px] text-white text-xs font-[10px] px-3 py-1 rounded-full mb-4
+                        <div>
+                            <div className="flex justify-between items-center">
+                                <h2 className="text-xl font-semibold mb-2 text-gray-100">
+                                    {item.todo}
+                                </h2>
+                                <span
+                                    className={`inline-block text-[10px] text-white text-xs font-[10px] px-3 py-1 rounded-full mb-4
                                 ${item.priority === "Low" ? "bg-green-500" :
-                                        item.priority === "Medium" ? "bg-yellow-500" :
-                                            "bg-red-500"}`}
-                            >
-                                {item.priority} Priority
-                            </span>
+                                            item.priority === "Medium" ? "bg-yellow-500" :
+                                                "bg-red-500"}`}
+                                >
+                                    {item.priority} Priority
+                                </span>
+                            </div>
+                            <p className="text-gray-400 text-sm mb-3">
+                                {item.description !== "" ? item.description : "No descripton has been added"}
+                            </p>
                         </div>
-                        <p className="text-gray-400 text-sm mb-3">
-                            {item.description !== "" ? item.description : "No descripton has been added"}
-                        </p>
+
 
                         <div className="flex justify-end gap-2">
                             <button

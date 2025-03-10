@@ -55,6 +55,7 @@ const Modal = () => {
             newTodos.push({ id: uuidv4(), todo, isCompleted: false, priority, description: des });
         }
 
+
         setTodos(newTodos);
         localStorage.setItem("todos", JSON.stringify(newTodos));
         window.dispatchEvent(new Event("storage"));
@@ -62,6 +63,9 @@ const Modal = () => {
         setPriority("");
         setdes("");
     };
+
+    // let status = todos.some(task => task.id === matched)
+    // console.log(status);
 
     return (
         <>
@@ -90,12 +94,14 @@ const Modal = () => {
                             Your message
                         </label>
                         <textarea
+                            maxlength="100"
                             value={des}
                             onChange={handleDes}
                             id="message"
                             rows="4"
                             className="w-full p-3 rounded-md bg-gray-900 text-white placeholder-gray-400 border border-gray-700 focus:ring-2 focus:ring-purple-500 focus:border-purple-500 outline-none"
-                            placeholder="Write your thoughts here..."
+                            placeholder="Enter up to 100 words..."
+
                         ></textarea>
 
                         <SelectDropdown onChange={handlePriority} />
