@@ -1,6 +1,7 @@
 import { useState, useEffect, useContext } from "react";
 import UserContext from "./UserContext";
 import Modal from "./modal"
+
 import { v4 as uuidv4 } from "uuid";
 
 const Single = () => {
@@ -8,7 +9,7 @@ const Single = () => {
         return JSON.parse(localStorage.getItem("todos")) || [];
     });
 
-    const { todo, setTodo, todos, setTodos, priority, setPriority, des, setdes, isModalOpen, setIsModalOpen, isOpen, setIsOpen, editID, seteditID } = useContext(UserContext);
+    const { todo, setTodo, todos, setTodos, priority, setPriority, des, setdes, isModalOpen, setIsModalOpen, isOpen, setIsOpen, editID, seteditID, matched, setmatched } = useContext(UserContext);
 
     useEffect(() => {
         localStorage.setItem("todos", JSON.stringify(local));
@@ -31,9 +32,17 @@ const Single = () => {
     };
 
     const handleEdit = (e) => {
-        let editedValue = local.filter(item => item.id === e.target.id)
-        console.log(editedValue.editID);
+        let editedValue = local.filter(item => item.id !== e.target.id)
+        // console.log(ed);        
+        setLocal([...editedValue])
+        seteditID(editID + 1)
+        setmatched(e.target.id)
     }
+
+    useEffect(() => {
+        console.log(editID);
+        console.log(matched);
+    }, [editID, matched]);
 
     return (
         <div className={`${local.length > 0 ? "grid md:grid-cols-4 sm:grid-cols-2 grid-cols-1 w-full gap-6 p-6 bg-gray-900 h-1/2" : "w-full gap-6 p-6"}`}>

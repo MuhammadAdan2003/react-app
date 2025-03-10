@@ -18,7 +18,9 @@ const Modal = () => {
         isModalOpen,
         setIsModalOpen,
         editID,
-        seteditID
+        seteditID,
+        matched,
+        setmatched
     } = useContext(UserProvider);
 
     const handleDes = (e) => {
@@ -59,13 +61,18 @@ const Modal = () => {
             return;
         }
 
-        const newTodos = [
-            ...todos,
-            { editID, id: uuidv4(), todo, isCompleted: false, priority, description: des },
-        ];
+        const newTodos = todos.map(task =>
+            task.id === matched
+                ? { ...task, todo, priority, description: des }
+                : task
+        );
+
+        if (!todos.map(task => task.id === matched)) {
+            newTodos.push({ id: uuidv4(), todo, isCompleted: false, priority, description: des });
+        }
+
         setTodos(newTodos);
         localStorage.setItem("todos", JSON.stringify(newTodos));
-
         window.dispatchEvent(new Event("storage"));
 
         setTodo("");
@@ -81,7 +88,9 @@ const Modal = () => {
                         ref={modalRef}
                         className="bg-gray-800 p-6 rounded-lg shadow-lg w-1/3 border border-gray-700"
                     >
-                        <h2 className="text-xl font-bold mb-4 text-white">Add New Task</h2>
+                        <h2 className="text-xl font-bold mb-4 text-white">
+                            {editID > 0 ? "Edit a task" : "Add new task"}
+                        </h2>
 
                         <input
                             type="text"
@@ -106,12 +115,14 @@ const Modal = () => {
                             placeholder="Write your thoughts here..."
                         ></textarea>
 
-                        {/* Ensure SelectDropdown component is imported or defined */}
                         <SelectDropdown onChange={handlePriority} />
 
                         <div className="mt-4 flex justify-end space-x-2">
                             <button
-                                onClick={() => setIsModalOpen(false)}
+                                onClick={() => {
+                                    setIsModalOpen(false);
+                                    seteditID(0);
+                                }}
                                 className="bg-red-600 text-white px-4 py-2 rounded-md hover:bg-gray-700 transition"
                             >
                                 Cancel
@@ -123,11 +134,11 @@ const Modal = () => {
                                 }}
                                 className="bg-purple-500 text-white px-4 py-2 rounded-md hover:bg-purple-600 transition"
                             >
-                                Save
+                                {editID > 0 ? "Edit" : "Save"}
                             </button>
                         </div>
                     </div>
-                </div>
+                </div >
             )}
         </>
     );
