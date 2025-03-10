@@ -21,3 +21,7 @@
     background: #7e22ce;
     /* Darker purple on hover */
 }
+
+body {
+    font-family: 'Poppins', sans-serif;
+}

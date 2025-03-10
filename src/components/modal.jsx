@@ -35,22 +35,6 @@ const Modal = () => {
         localStorage.setItem("todos", JSON.stringify(todos));
     }, [todos]);
 
-    // useEffect(() => {
-    //     function handleClickOutside(event) {
-    //         if (modalRef.current && !modalRef.current.contains(event.target)) {
-    //             setIsModalOpen(false);
-    //         }
-    //     }
-
-    //     if (isModalOpen) {
-    //         document.addEventListener("mousedown", handleClickOutside);
-    //     }
-
-    //     return () => {
-    //         document.removeEventListener("mousedown", handleClickOutside);
-    //     };
-    // }, [isModalOpen]);
-
     const handleChange = (e) => {
         setTodo(e.target.value);
     };
@@ -67,14 +51,13 @@ const Modal = () => {
                 : task
         );
 
-        if (!todos.map(task => task.id === matched)) {
+        if (!todos.some(task => task.id === matched)) {
             newTodos.push({ id: uuidv4(), todo, isCompleted: false, priority, description: des });
         }
 
         setTodos(newTodos);
         localStorage.setItem("todos", JSON.stringify(newTodos));
         window.dispatchEvent(new Event("storage"));
-
         setTodo("");
         setPriority("");
         setdes("");
