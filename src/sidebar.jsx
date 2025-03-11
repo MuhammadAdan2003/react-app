@@ -24,9 +24,9 @@ const SidebarLayout = () => {
 
     return (
         <>
-            <div className="bg-gray-800 text-gray-100 flex justify-between md:hidden">
+            <div className="bg-gray-800 text-gray-100 flex justify-between md:hidden relative z-40">
                 <a href="#" className="block p-4 text-white font-bold">
-                    Adam Kindberg
+                    Todo app
                 </a>
                 <button
                     className="mobile-menu-button p-4 focus:outline-none focus:bg-gray-700"

@@ -36,7 +36,7 @@ const Single = () => {
     }
 
     return (
-        <div className={`${local.length > 0 ? "grid md:grid-cols-4 sm:grid-cols-2 grid-cols-1 w-full gap-6 p-6 bg-gray-900 h-1/2" : "w-full gap-6 p-6"}`}>
+        <div className={`${local.length > 0 ? "grid md:grid-cols-2 lg:grid-cols-4 grid-cols-1 w-full gap-6 p-6 bg-gray-900 h-1/2" : "w-full gap-6 p-6"}`}>
             {local.length > 0 ? (
                 local.map((item) => (
                     <div
