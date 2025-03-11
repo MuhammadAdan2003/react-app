@@ -6,7 +6,7 @@ const Single = () => {
         return JSON.parse(localStorage.getItem("todos")) || [];
     });
 
-    const { todo, setTodo, todos, setTodos, priority, setPriority, des, setdes, isModalOpen, setIsModalOpen, isOpen, setIsOpen, editID, seteditID, matched, setmatched } = useContext(UserContext);
+    const { todo, setTodo, todos, setTodos, priority, setPriority, des, setdes, isModalOpen, setIsModalOpen, isOpen, setIsOpen, editID, seteditID, matched, setmatched, check, setcheck } = useContext(UserContext);
 
     useEffect(() => {
         localStorage.setItem("todos", JSON.stringify(local));
@@ -35,6 +35,11 @@ const Single = () => {
         setmatched(e.target.id)
     }
 
+    useEffect(() => {
+        const sorted = local.filter(item => item.priority === check)
+        console.log(sorted);
+    }, [check])
+
     return (
         <div className={`${local.length > 0 ? "grid md:grid-cols-2 lg:grid-cols-4 grid-cols-1 w-full gap-6 p-6 bg-gray-900 h-1/2" : "w-full gap-6 p-6"}`}>
             {local.length > 0 ? (
@@ -61,8 +66,6 @@ const Single = () => {
                                 {item.description !== "" ? item.description : "No descripton has been added"}
                             </p>
                         </div>
-
-
                         <div className="flex justify-end gap-2">
                             <button
                                 id={item.id}

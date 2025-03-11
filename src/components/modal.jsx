@@ -63,17 +63,14 @@ const Modal = () => {
         setPriority("");
         setdes("");
     };
-
-    // let status = todos.some(task => task.id === matched)
-    // console.log(status);
-
+    // console.log("hello");
     return (
         <>
             {isModalOpen && (
                 <div className="fixed inset-0 flex items-center justify-center bg-[#00000080] bg-opacity-50 z-50">
                     <div
                         ref={modalRef}
-                        className="bg-gray-800 p-6 rounded-lg shadow-lg w-1/3 border border-gray-700"
+                        className="bg-gray-800 p-6 rounded-lg shadow-lg lg:w-1/3 md:w-[80%] border border-gray-700"
                     >
                         <h2 className="text-xl font-bold mb-4 text-white">
                             {editID > 0 ? "Edit a task" : "Add new task"}
