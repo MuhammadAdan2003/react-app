@@ -5,7 +5,8 @@ const Single = () => {
     const [local, setLocal] = useState(() => {
         return JSON.parse(localStorage.getItem("todos")) || [];
     });
-
+    const [filteredTodos, setFilteredTodos] = useState([]);
+    // const [sorted , setsorted] = useEffect
     const { todo, setTodo, todos, setTodos, priority, setPriority, des, setdes, isModalOpen, setIsModalOpen, isOpen, setIsOpen, editID, seteditID, matched, setmatched, check, setcheck } = useContext(UserContext);
 
     useEffect(() => {
@@ -36,14 +37,19 @@ const Single = () => {
     }
 
     useEffect(() => {
-        const sorted = local.filter(item => item.priority === check)
-        console.log(sorted);
-    }, [check])
+        if (check === "" || check === "All") {
+            setFilteredTodos(local);
+        } else {
+            const sortedTasks = local.filter(item => item.priority === check);
+            setFilteredTodos(sortedTasks.length > 0 ? sortedTasks : []);
+        }
+    }, [check, local]);
+
 
     return (
-        <div className={`${local.length > 0 ? "grid md:grid-cols-2 lg:grid-cols-4 grid-cols-1 w-full gap-6 p-6 bg-gray-900 h-1/2" : "w-full gap-6 p-6"}`}>
-            {local.length > 0 ? (
-                local.map((item) => (
+        <div className={`${filteredTodos.length > 0 ? "grid md:grid-cols-2 lg:grid-cols-4 grid-cols-1 w-full gap-6 p-6 bg-gray-900 h-1/2" : "w-full gap-6 p-6"}`}>
+            {filteredTodos.length > 0 ? (
+                filteredTodos.slice().reverse().map((item) => (
                     <div
                         key={item.id}
                         className="w-full flex flex-col justify-between max-w-md bg-gray-800 text-white p-6 rounded-lg shadow-xl transform hover:scale-105 transition duration-300"
@@ -55,7 +61,7 @@ const Single = () => {
                                 </h2>
                                 <span
                                     className={`inline-block text-[10px] text-white text-xs font-[10px] px-3 py-1 rounded-full mb-4
-                                ${item.priority === "Low" ? "bg-green-500" :
+                            ${item.priority === "Low" ? "bg-green-500" :
                                             item.priority === "Medium" ? "bg-yellow-500" :
                                                 "bg-red-500"}`}
                                 >
@@ -63,7 +69,7 @@ const Single = () => {
                                 </span>
                             </div>
                             <p className="text-gray-400 text-sm mb-3">
-                                {item.description !== "" ? item.description : "No descripton has been added"}
+                                {item.description !== "" ? item.description : "No description has been added"}
                             </p>
                         </div>
                         <div className="flex justify-end gap-2">
@@ -75,7 +81,9 @@ const Single = () => {
                                     setPriority(item.priority)
                                     setdes(item.description)
                                     handleEdit(e)
-                                }} className="bg-blue-500 text-sm text-white cursor-pointer px-4 py-1 rounded-lg hover:bg-blue-600 transition">
+                                }}
+                                className="bg-blue-500 text-sm text-white cursor-pointer px-4 py-1 rounded-lg hover:bg-blue-600 transition"
+                            >
                                 Edit
                             </button>
                             <button
@@ -86,14 +94,15 @@ const Single = () => {
                             </button>
                         </div>
                     </div>
-                )).reverse()
+                ))
             ) : (
                 <p className="col-span-3 text-center text-gray-400 text-lg">
-                    No todos available
+                    {check !== "" ? `No todos available for ${check} priority` : "No todos available"}
                 </p>
             )}
             <Modal />
         </div>
+
     );
 };
 

@@ -25,7 +25,7 @@ const SidebarLayout = () => {
     const handlePriority = (e) => {
         setcheck(e.target.value)
     }
-    
+
     return (
         <>
             <div className="bg-gray-800 text-gray-100 flex justify-between md:hidden relative z-40">

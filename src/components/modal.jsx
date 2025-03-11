@@ -3,6 +3,7 @@ import { useState, useRef, useEffect, useContext } from "react";
 import UserProvider from "./UserContext"
 import SelectDropdown from "./selectDropdown"
 import { v4 as uuidv4 } from "uuid";
+// import DateRange from "./dateRange";
 
 const Modal = () => {
     const modalRef = useRef(null);
@@ -98,11 +99,10 @@ const Modal = () => {
                             rows="4"
                             className="w-full p-3 rounded-md bg-gray-900 text-white placeholder-gray-400 border border-gray-700 focus:ring-2 focus:ring-purple-500 focus:border-purple-500 outline-none"
                             placeholder="Enter up to 100 words..."
-
                         ></textarea>
 
                         <SelectDropdown onChange={handlePriority} />
-
+                        {/* <DateRange /> */}
                         <div className="mt-4 flex justify-end space-x-2">
                             <button
                                 onClick={() => {
