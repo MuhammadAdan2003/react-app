@@ -66,7 +66,7 @@ const SidebarLayout = () => {
                     <select
                         className="form-select appearance-none block w-full px-3 py-1.5 text-base font-normal text-white bg-gray-900 bg-clip-padding bg-no-repeat border border-solid border-gray-600 rounded transition ease-in-out m-0 focus:ring-2 focus:ring-purple-500 focus:border-purple-500 outline-none"
                         aria-label="Default select example"
-                        onClick={(e) => { handlePriority(e) }}
+                        onChange={(e) => { handlePriority(e) }}
                     >
                         <option className="bg-gray-900 text-white" defaultValue>Select priority</option>
                         <option className="bg-gray-900 text-white" value="All">All</option>

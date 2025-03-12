@@ -6,7 +6,6 @@ const Single = () => {
         return JSON.parse(localStorage.getItem("todos")) || [];
     });
     const [filteredTodos, setFilteredTodos] = useState([]);
-    // const [sorted , setsorted] = useEffect
     const { todo, setTodo, todos, setTodos, priority, setPriority, des, setdes, isModalOpen, setIsModalOpen, isOpen, setIsOpen, editID, seteditID, matched, setmatched, check, setcheck } = useContext(UserContext);
 
     useEffect(() => {
