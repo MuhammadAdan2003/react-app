@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import UserContext from './UserContext';
-import App from '../App';
 
 const UserProvider = ({ children }) => {
     const [statusTask, setstatusTask] = useState("")

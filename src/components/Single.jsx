@@ -3,31 +3,22 @@ import UserContext from "./UserContext";
 import Modal from "./modal"
 
 const Single = () => {
-    const { todo,
+    const {
         setTodo,
         todos,
         setTodos,
-        priority,
         setPriority,
-        des,
         setdes,
-        isModalOpen,
         setIsModalOpen,
-        isOpen,
-        setIsOpen,
         editID,
         seteditID,
-        matched,
         setmatched,
         check,
-        setcheck,
         filteredTodos,
         setFilteredTodos,
         statusTask,
-        setstatusTask,
         local,
         setLocal } = useContext(UserContext);
-
 
     useEffect(() => {
         localStorage.setItem("todos", JSON.stringify(local));

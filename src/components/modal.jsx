@@ -1,9 +1,7 @@
 import { useState, useRef, useEffect, useContext } from "react";
-// import UserContext from "./components/UserProvider";
 import UserProvider from "./UserContext"
 import SelectDropdown from "./selectDropdown"
 import { v4 as uuidv4 } from "uuid";
-// import DateRange from "./dateRange";
 
 const Modal = () => {
     const modalRef = useRef(null);

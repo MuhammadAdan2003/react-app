@@ -3,7 +3,7 @@ import UserContext from './components/UserContext';
 import Modal from "./components/modal"
 const SidebarLayout = () => {
     const modalRef = useRef(null);
-    const { isModalOpen, setIsModalOpen, isOpen, setIsOpen, check, setcheck, statusTask, setstatusTask, local, setlocal, filteredTodos, setFilteredTodos } = useContext(UserContext);
+    const { isModalOpen, setIsModalOpen, isOpen, setIsOpen, setcheck, setstatusTask, } = useContext(UserContext);
 
     useEffect(() => {
         function handleClickOutside(event) {
@@ -32,18 +32,6 @@ const SidebarLayout = () => {
     const handleStatus = (e) => {
         setstatusTask(e.target.value);
     };
-
-
-    // useEffect(() => {
-    //     if (statusTask === "" || statusTask === "All") {
-    //         setFilteredTodos(local);
-    //     } else {
-    //         const filtered = local.filter(item =>
-    //             statusTask === "Completed" ? item.isCompleted : !item.isCompleted
-    //         );
-    //         setFilteredTodos(filtered.length > 0 ? filtered : []);
-    //     }
-    // }, [statusTask, local]);
 
     return (
         <>
