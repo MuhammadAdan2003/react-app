@@ -74,26 +74,16 @@ const Single = () => {
         setFilteredTodos(filtered.length > 0 ? filtered : []);
     }, [statusTask, check, local]);
 
+    const Taskstatus = (e) => {
+        const updatedTodos = filteredTodos.map(item =>
+            item.id === e.target.id ? { ...item, isCompleted: !item.isCompleted } : item
+        );
 
-    // useEffect(() => {
-    //     if (check === "" || check === "All") {
-    //         setFilteredTodos(local);
-    //     } else {
-    //         const sortedTasks = local.filter(item => item.priority === check);
-    //         setFilteredTodos(sortedTasks.length > 0 ? sortedTasks : []);
-    //     }
-
-    // }, [check, local]);
-
-    // const status = (e) => {
-    //     setLocal(prevLocal =>
-    //         prevLocal.map(item =>
-    //             item.id === e.target.id
-    //                 ? { ...item, isCompleted: !item.isCompleted }
-    //                 : item
-    //         )
-    //     );
-    // };
+        setFilteredTodos(updatedTodos);
+        setTodos(updatedTodos);
+        localStorage.setItem("todos", JSON.stringify(updatedTodos));
+        window.dispatchEvent(new Event("storage"));
+    };
 
     return (
         <div className={`${filteredTodos.length > 0 ? "grid md:grid-cols-2 lg:grid-cols-4 grid-cols-1 w-full gap-6 p-6 bg-gray-900 h-1/2" : "w-full gap-6 p-6"}`}>
@@ -142,7 +132,7 @@ const Single = () => {
                                 Delete
                             </button>
                         </div>
-                        <p className="mt-5 flex gap-2 items-center"><input onChange={(e) => { status(e) }} id={item.id} className="h-5 w-5" type="checkbox" checked={item.isCompleted} /><span className={`text-[12px] text-white text-xs font-[10px] px-3 py-1 rounded-full
+                        <p className="mt-5 flex gap-2 items-center"><input onChange={(e) => { Taskstatus(e) }} checked={item.isCompleted} id={item.id} className="h-5 w-5" type="checkbox" /><span className={`text-[12px] text-white text-xs font-[10px] px-3 py-1 rounded-full
                             ${item.isCompleted ? "bg-[#00c95187]" : "bg-[#ff0523bf]"}`}>{item.isCompleted ? "Completed" : "Incompleted"}</span></p>
                     </div>
                 ))
