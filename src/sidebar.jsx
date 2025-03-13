@@ -45,13 +45,6 @@ const SidebarLayout = () => {
         }
     }, [statusTask, local]);
 
-    // console.log(local);
-    //     const handleCancel = () => {
-    //     seteditID(0); // Reset edit mode
-    //     setmatched(""); // Clear matched ID
-    // };
-
-
     return (
         <>
             <div className="bg-gray-800 text-gray-100 flex justify-between md:hidden relative z-40">
@@ -100,24 +93,30 @@ const SidebarLayout = () => {
                             <span>{item.name}</span>
                         </button>
                     ))}
-                    <label htmlFor=""></label>
-                    <select
-                        className="mt-5 form-select appearance-none block w-full px-3 py-1.5 text-base font-normal text-white bg-gray-900 bg-clip-padding bg-no-repeat border border-solid border-gray-600 rounded transition ease-in-out m-0 focus:ring-2 focus:ring-purple-500 focus:border-purple-500 outline-none"
-                        aria-label="Default select example"
-                        onChange={(e) => { handlePriority(e) }}
-                    >
-                        <option className="bg-gray-900 text-white" disabled defaultValue>Select priority</option>
-                        <option className="bg-gray-900 text-white" value="All">All</option>
-                        <option className="bg-gray-900 text-white" value="High">High</option>
-                        <option className="bg-gray-900 text-white" value="Medium">Medium</option>
-                        <option className="bg-gray-900 text-white" value="Low">Low</option>
-                    </select>
-                    <select name="" id="" onChange={(e) => { handleStatus(e) }} className="mt-5 form-select appearance-none block w-full px-3 py-1.5 text-base font-normal text-white bg-gray-900 bg-clip-padding bg-no-repeat border border-solid border-gray-600 rounded transition ease-in-out m-0 focus:ring-2 focus:ring-purple-500 focus:border-purple-500 outline-none">
-                        <option className="bg-gray-900 text-white" disabled defaultValue>Select Status</option>
-                        <option className="bg-gray-900 text-white" value="All">All</option>
-                        <option className="bg-gray-900 text-white" value="Completed">Completed</option>
-                        <option className="bg-gray-900 text-white" value="Incompleted">Incompleted</option>
-                    </select>
+                    <div className="form-group mt-5">
+                        <label className="mt-5" htmlFor="">Select By Priority</label>
+                        <select
+                            className=" form-select appearance-none block w-full px-3 py-1.5 text-base font-normal text-white bg-gray-900 bg-clip-padding bg-no-repeat border border-solid border-gray-600 rounded transition ease-in-out m-0 focus:ring-2 focus:ring-purple-500 focus:border-purple-500 outline-none"
+                            aria-label="Default select example"
+                            onChange={(e) => { handlePriority(e) }}
+                        >
+                            <option className="bg-gray-900 text-white" disabled defaultValue>Select priority</option>
+                            <option className="bg-gray-900 text-white" value="All">All</option>
+                            <option className="bg-gray-900 text-white" value="High">High</option>
+                            <option className="bg-gray-900 text-white" value="Medium">Medium</option>
+                            <option className="bg-gray-900 text-white" value="Low">Low</option>
+                        </select>
+                    </div>
+                    <div className="form-group mt-5">
+                        <label htmlFor="">Select By Status</label>
+                        <select name="" id="" onChange={(e) => { handleStatus(e) }} className=" form-select appearance-none block w-full px-3 py-1.5 text-base font-normal text-white bg-gray-900 bg-clip-padding bg-no-repeat border border-solid border-gray-600 rounded transition ease-in-out m-0 focus:ring-2 focus:ring-purple-500 focus:border-purple-500 outline-none">
+                            <option className="bg-gray-900 text-white" disabled defaultValue>Select Status</option>
+                            <option className="bg-gray-900 text-white" value="All">All</option>
+                            <option className="bg-gray-900 text-white" value="Completed">Completed</option>
+                            <option className="bg-gray-900 text-white" value="Incompleted">Incompleted</option>
+                        </select>
+                    </div>
+
 
                 </nav>
             </div>
