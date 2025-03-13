@@ -34,16 +34,16 @@ const SidebarLayout = () => {
     };
 
 
-    useEffect(() => {
-        if (statusTask === "" || statusTask === "All") {
-            setFilteredTodos(local);
-        } else {
-            const filtered = local.filter(item =>
-                statusTask === "Completed" ? item.isCompleted : !item.isCompleted
-            );
-            setFilteredTodos(filtered.length > 0 ? filtered : []);
-        }
-    }, [statusTask, local]);
+    // useEffect(() => {
+    //     if (statusTask === "" || statusTask === "All") {
+    //         setFilteredTodos(local);
+    //     } else {
+    //         const filtered = local.filter(item =>
+    //             statusTask === "Completed" ? item.isCompleted : !item.isCompleted
+    //         );
+    //         setFilteredTodos(filtered.length > 0 ? filtered : []);
+    //     }
+    // }, [statusTask, local]);
 
     return (
         <>
@@ -116,8 +116,6 @@ const SidebarLayout = () => {
                             <option className="bg-gray-900 text-white" value="Incompleted">Incompleted</option>
                         </select>
                     </div>
-
-
                 </nav>
             </div>
             <Modal />

@@ -46,7 +46,6 @@ const Single = () => {
 
     const handleDelete = (id) => {
         const updatedTodos = todos.filter((item) => item.id !== id);
-
         setTodos(updatedTodos);
         setLocal(updatedTodos);
 
@@ -60,24 +59,41 @@ const Single = () => {
     }
 
     useEffect(() => {
-        if (check === "" || check === "All") {
-            setFilteredTodos(local);
-        } else {
-            const sortedTasks = local.filter(item => item.priority === check);
-            setFilteredTodos(sortedTasks.length > 0 ? sortedTasks : []);
+        let filtered = local;
+
+        if (check !== "" && check !== "All") {
+            filtered = filtered.filter(item => item.priority === check);
         }
 
-    }, [check, local]);
+        if (statusTask !== "" && statusTask !== "All") {
+            filtered = filtered.filter(item =>
+                statusTask === "Completed" ? item.isCompleted : !item.isCompleted
+            );
+        }
 
-    const status = (e) => {
-        setLocal(prevLocal =>
-            prevLocal.map(item =>
-                item.id === e.target.id
-                    ? { ...item, isCompleted: !item.isCompleted }
-                    : item
-            )
-        );
-    };
+        setFilteredTodos(filtered.length > 0 ? filtered : []);
+    }, [statusTask, check, local]);
+
+
+    // useEffect(() => {
+    //     if (check === "" || check === "All") {
+    //         setFilteredTodos(local);
+    //     } else {
+    //         const sortedTasks = local.filter(item => item.priority === check);
+    //         setFilteredTodos(sortedTasks.length > 0 ? sortedTasks : []);
+    //     }
+
+    // }, [check, local]);
+
+    // const status = (e) => {
+    //     setLocal(prevLocal =>
+    //         prevLocal.map(item =>
+    //             item.id === e.target.id
+    //                 ? { ...item, isCompleted: !item.isCompleted }
+    //                 : item
+    //         )
+    //     );
+    // };
 
     return (
         <div className={`${filteredTodos.length > 0 ? "grid md:grid-cols-2 lg:grid-cols-4 grid-cols-1 w-full gap-6 p-6 bg-gray-900 h-1/2" : "w-full gap-6 p-6"}`}>
