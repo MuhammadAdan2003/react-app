@@ -27,7 +27,10 @@ const SidebarLayout = () => {
         setcheck(e.target.value)
     }
 
-    let value;
+    const handleLog = (e) => {
+        console.log();
+
+    }
 
     const handleStatus = (e) => {
         setstatusTask(e.target.value);
@@ -40,16 +43,7 @@ const SidebarLayout = () => {
                     <a href="#" className="block p-4 text-white font-bold">
                         Todo app
                     </a>
-                    <div>
-                        <p className="text-white jambo"
-                            onClick={(e) => {
-                                setIsOpen(!isOpen);
-                                seteditID(0)
-                            }}
-                        >kato</p>
-                    </div>
                 </div>
-
                 <button
                     className="mobile-menu-button p-4 focus:outline-none focus:bg-gray-700"
                     onClick={() => setIsOpen(!isOpen)}
@@ -59,7 +53,6 @@ const SidebarLayout = () => {
                     </svg>
                 </button>
             </div >
-
             <div style={{ zIndex: 10 }} className={`sidebar bg-gray-800 text-white w-64 space-y-6 py-5 px-2 absolute inset-y-0 left-0 transform transition duration-200 ease-in-out ${isOpen ? "translate-x-0" : "-translate-x-full"} md:relative md:translate-x-0`}>
                 <a href="#" className="text-white flex items-center space-x-2 px-4">
                     <span className="text-2xl font-extrabold">Todo app</span>

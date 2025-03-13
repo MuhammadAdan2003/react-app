@@ -8,7 +8,6 @@ import UserContext from './components/UserContext';
 // import Calendar from './components/date'
 import SidebarLayout from './sidebar';
 function App() {
-
   return (
     <>
       <div className="relative min-h-screen md:flex">
