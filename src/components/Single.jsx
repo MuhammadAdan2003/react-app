@@ -5,8 +5,7 @@ const Single = () => {
     const [local, setLocal] = useState(() => {
         return JSON.parse(localStorage.getItem("todos")) || [];
     });
-    const [filteredTodos, setFilteredTodos] = useState([]);
-    const { todo, setTodo, todos, setTodos, priority, setPriority, des, setdes, isModalOpen, setIsModalOpen, isOpen, setIsOpen, editID, seteditID, matched, setmatched, check, setcheck } = useContext(UserContext);
+    const { todo, setTodo, todos, setTodos, priority, setPriority, des, setdes, isModalOpen, setIsModalOpen, isOpen, setIsOpen, editID, seteditID, matched, setmatched, check, setcheck, filteredTodos, setFilteredTodos } = useContext(UserContext);
 
     useEffect(() => {
         localStorage.setItem("todos", JSON.stringify(local));
@@ -44,6 +43,15 @@ const Single = () => {
         }
     }, [check, local]);
 
+    const status = (e) => {
+        setLocal(prevLocal =>
+            prevLocal.map(item =>
+                item.id === e.target.id
+                    ? { ...item, isCompleted: !item.isCompleted }
+                    : item
+            )
+        );
+    };
 
     return (
         <div className={`${filteredTodos.length > 0 ? "grid md:grid-cols-2 lg:grid-cols-4 grid-cols-1 w-full gap-6 p-6 bg-gray-900 h-1/2" : "w-full gap-6 p-6"}`}>
@@ -60,7 +68,7 @@ const Single = () => {
                                 </h2>
                                 <span
                                     className={`inline-block text-[10px] text-white text-xs font-[10px] px-3 py-1 rounded-full mb-4
-                            ${item.priority === "Low" ? "bg-green-500" :
+                                            ${item.priority === "Low" ? "bg-green-500" :
                                             item.priority === "Medium" ? "bg-yellow-500" :
                                                 "bg-red-500"}`}
                                 >
@@ -92,6 +100,8 @@ const Single = () => {
                                 Delete
                             </button>
                         </div>
+                        <p className="mt-5 flex gap-2 items-center"><input onChange={(e) => { status(e) }} id={item.id} className="h-5 w-5" type="checkbox" checked={item.isCompleted} /><span className={`text-[12px] text-white text-xs font-[10px] px-3 py-1 rounded-full
+                            ${item.isCompleted ? "bg-[#00c95187]" : "bg-[#ff0523bf]"}`}>{item.isCompleted ? "Completed" : "Incompleted"}</span></p>
                     </div>
                 ))
             ) : (

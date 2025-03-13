@@ -56,7 +56,6 @@ const Modal = () => {
             newTodos.push({ id: uuidv4(), todo, isCompleted: false, priority, description: des });
         }
 
-
         setTodos(newTodos);
         localStorage.setItem("todos", JSON.stringify(newTodos));
         window.dispatchEvent(new Event("storage"));
@@ -64,7 +63,6 @@ const Modal = () => {
         setPriority("");
         setdes("");
     };
-    // console.log("hello");
     return (
         <>
             {isModalOpen && (
