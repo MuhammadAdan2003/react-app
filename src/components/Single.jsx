@@ -3,10 +3,31 @@ import UserContext from "./UserContext";
 import Modal from "./modal"
 
 const Single = () => {
+    const { todo,
+        setTodo,
+        todos,
+        setTodos,
+        priority,
+        setPriority,
+        des,
+        setdes,
+        isModalOpen,
+        setIsModalOpen,
+        isOpen,
+        setIsOpen,
+        editID,
+        seteditID,
+        matched,
+        setmatched,
+        check,
+        setcheck,
+        filteredTodos,
+        setFilteredTodos,
+        statusTask,
+        setstatusTask,
+        local,
+        setLocal } = useContext(UserContext);
 
-
-
-    const { todo, setTodo, todos, setTodos, priority, setPriority, des, setdes, isModalOpen, setIsModalOpen, isOpen, setIsOpen, editID, seteditID, matched, setmatched, check, setcheck, filteredTodos, setFilteredTodos, statusTask, setstatusTask, local, setLocal } = useContext(UserContext);
 
     useEffect(() => {
         localStorage.setItem("todos", JSON.stringify(local));
@@ -24,13 +45,16 @@ const Single = () => {
     }, []);
 
     const handleDelete = (id) => {
-        const deleted = local.filter((item) => item.id !== id);
-        setLocal(deleted);
+        const updatedTodos = todos.filter((item) => item.id !== id);
+
+        setTodos(updatedTodos);
+        setLocal(updatedTodos);
+
+        localStorage.setItem("todos", JSON.stringify(updatedTodos));
+        window.dispatchEvent(new Event("storage"));
     };
 
     const handleEdit = (e) => {
-        // let editedValue = local.filter(item => item.id !== e.target.id)
-        // setLocal([...editedValue])
         seteditID(editID + 1)
         setmatched(e.target.id)
     }
@@ -54,8 +78,6 @@ const Single = () => {
             )
         );
     };
-
-
 
     return (
         <div className={`${filteredTodos.length > 0 ? "grid md:grid-cols-2 lg:grid-cols-4 grid-cols-1 w-full gap-6 p-6 bg-gray-900 h-1/2" : "w-full gap-6 p-6"}`}>

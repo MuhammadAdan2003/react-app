@@ -26,7 +26,34 @@ const UserProvider = ({ children }) => {
         setUser(user === 'Hassan' ? 'Adan' : 'Hassan');
     };
     return (
-        <UserContext.Provider value={{ user, toggleUser, todo, setTodo, todos, setTodos, priority, setPriority, des, setdes, isModalOpen, setIsModalOpen, isOpen, setIsOpen, editID, seteditID, matched, setmatched, check, setcheck, statusTask, setstatusTask, filteredTodos, setFilteredTodos, local, setLocal }}>
+        <UserContext.Provider value={{
+            user,
+            toggleUser,
+            todo,
+            setTodo,
+            todos,
+            setTodos,
+            priority,
+            setPriority,
+            des,
+            setdes,
+            isModalOpen,
+            setIsModalOpen,
+            isOpen,
+            setIsOpen,
+            editID,
+            seteditID,
+            matched,
+            setmatched,
+            check,
+            setcheck,
+            statusTask,
+            setstatusTask,
+            filteredTodos,
+            setFilteredTodos,
+            local,
+            setLocal
+        }}>
             {children}
             {/* <App /> */}
         </UserContext.Provider>

@@ -57,6 +57,7 @@ const Modal = () => {
         }
 
         setTodos(newTodos);
+
         localStorage.setItem("todos", JSON.stringify(newTodos));
         window.dispatchEvent(new Event("storage"));
         setTodo("");
@@ -109,7 +110,6 @@ const Modal = () => {
                         ></textarea>
 
                         <SelectDropdown onChange={handlePriority} />
-                        {/* <DateRange /> */}
                         <div className="mt-4 flex justify-end space-x-2">
                             <button
                                 onClick={() => {
