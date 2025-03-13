@@ -3,7 +3,7 @@ import UserContext from './UserContext';
 import App from '../App';
 
 const UserProvider = ({ children }) => {
-    const [status, setstatus] = useState("")
+    const [statusTask, setstatusTask] = useState("")
     const [check, setcheck] = useState("")
     const [filteredTodos, setFilteredTodos] = useState([]);
     const [matched, setmatched] = useState("")
@@ -14,6 +14,9 @@ const UserProvider = ({ children }) => {
     const [todo, setTodo] = useState("");
     const [priority, setPriority] = useState("")
     const [des, setdes] = useState("")
+    const [local, setLocal] = useState(() => {
+        return JSON.parse(localStorage.getItem("todos")) || [];
+    });
     const [todos, setTodos] = useState(() => {
         const savedTodos = localStorage.getItem("todos");
         return savedTodos ? JSON.parse(savedTodos) : [];
@@ -23,7 +26,7 @@ const UserProvider = ({ children }) => {
         setUser(user === 'Hassan' ? 'Adan' : 'Hassan');
     };
     return (
-        <UserContext.Provider value={{ user, toggleUser, todo, setTodo, todos, setTodos, priority, setPriority, des, setdes, isModalOpen, setIsModalOpen, isOpen, setIsOpen, editID, seteditID, matched, setmatched, check, setcheck, status, setstatus, filteredTodos, setFilteredTodos }}>
+        <UserContext.Provider value={{ user, toggleUser, todo, setTodo, todos, setTodos, priority, setPriority, des, setdes, isModalOpen, setIsModalOpen, isOpen, setIsOpen, editID, seteditID, matched, setmatched, check, setcheck, statusTask, setstatusTask, filteredTodos, setFilteredTodos, local, setLocal }}>
             {children}
             {/* <App /> */}
         </UserContext.Provider>

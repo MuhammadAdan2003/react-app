@@ -1,11 +1,12 @@
 import { useState, useEffect, useContext } from "react";
 import UserContext from "./UserContext";
 import Modal from "./modal"
+
 const Single = () => {
-    const [local, setLocal] = useState(() => {
-        return JSON.parse(localStorage.getItem("todos")) || [];
-    });
-    const { todo, setTodo, todos, setTodos, priority, setPriority, des, setdes, isModalOpen, setIsModalOpen, isOpen, setIsOpen, editID, seteditID, matched, setmatched, check, setcheck, filteredTodos, setFilteredTodos } = useContext(UserContext);
+
+
+
+    const { todo, setTodo, todos, setTodos, priority, setPriority, des, setdes, isModalOpen, setIsModalOpen, isOpen, setIsOpen, editID, seteditID, matched, setmatched, check, setcheck, filteredTodos, setFilteredTodos, statusTask, setstatusTask, local, setLocal } = useContext(UserContext);
 
     useEffect(() => {
         localStorage.setItem("todos", JSON.stringify(local));
@@ -28,8 +29,8 @@ const Single = () => {
     };
 
     const handleEdit = (e) => {
-        let editedValue = local.filter(item => item.id !== e.target.id)
-        setLocal([...editedValue])
+        // let editedValue = local.filter(item => item.id !== e.target.id)
+        // setLocal([...editedValue])
         seteditID(editID + 1)
         setmatched(e.target.id)
     }
@@ -41,6 +42,7 @@ const Single = () => {
             const sortedTasks = local.filter(item => item.priority === check);
             setFilteredTodos(sortedTasks.length > 0 ? sortedTasks : []);
         }
+
     }, [check, local]);
 
     const status = (e) => {
@@ -52,6 +54,8 @@ const Single = () => {
             )
         );
     };
+
+
 
     return (
         <div className={`${filteredTodos.length > 0 ? "grid md:grid-cols-2 lg:grid-cols-4 grid-cols-1 w-full gap-6 p-6 bg-gray-900 h-1/2" : "w-full gap-6 p-6"}`}>

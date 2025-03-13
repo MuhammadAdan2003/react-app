@@ -63,6 +63,12 @@ const Modal = () => {
         setPriority("");
         setdes("");
     };
+
+    const handleCancel = () => {
+        seteditID(0);
+        setmatched("");
+    };
+    
     return (
         <>
             {isModalOpen && (
@@ -106,6 +112,7 @@ const Modal = () => {
                                 onClick={() => {
                                     setIsModalOpen(false);
                                     seteditID(0);
+                                    handleCancel()
                                 }}
                                 className="bg-red-600 text-white px-4 py-2 rounded-md hover:bg-gray-700 transition"
                             >

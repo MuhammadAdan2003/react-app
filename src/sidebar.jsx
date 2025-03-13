@@ -3,7 +3,7 @@ import UserContext from './components/UserContext';
 import Modal from "./components/modal"
 const SidebarLayout = () => {
     const modalRef = useRef(null);
-    const { isModalOpen, setIsModalOpen, isOpen, setIsOpen, check, setcheck, status, setstatus, local, setlocal, filteredTodos, setFilteredTodos } = useContext(UserContext);
+    const { isModalOpen, setIsModalOpen, isOpen, setIsOpen, check, setcheck, statusTask, setstatusTask, local, setlocal, filteredTodos, setFilteredTodos } = useContext(UserContext);
 
     useEffect(() => {
         function handleClickOutside(event) {
@@ -22,23 +22,34 @@ const SidebarLayout = () => {
     },
         [isModalOpen]);
 
+
     const handlePriority = (e) => {
         setcheck(e.target.value)
     }
 
-    // const handleStatus = (e) => {
-    //     const newStatus = e.target.value;
-    //     setstatus(newStatus);
+    let value;
 
-    //     if (newStatus === "" || newStatus === "All") {
-    //         setFilteredTodos(local);
-    //     } else {
-    //         const value = newStatus === "Completed";
-    //         setFilteredTodos(local.filter(item => item.status === value));
-    //     }
+    const handleStatus = (e) => {
+        setstatusTask(e.target.value);
+    };
+
+
+    useEffect(() => {
+        if (statusTask === "" || statusTask === "All") {
+            setFilteredTodos(local);
+        } else {
+            const filtered = local.filter(item =>
+                statusTask === "Completed" ? item.isCompleted : !item.isCompleted
+            );
+            setFilteredTodos(filtered.length > 0 ? filtered : []);
+        }
+    }, [statusTask, local]);
+
+    // console.log(local);
+    //     const handleCancel = () => {
+    //     seteditID(0); // Reset edit mode
+    //     setmatched(""); // Clear matched ID
     // };
-
-
 
 
     return (
@@ -52,9 +63,8 @@ const SidebarLayout = () => {
                         <p className="text-white jambo"
                             onClick={(e) => {
                                 setIsOpen(!isOpen);
-                                handleCancel(e);
+                                seteditID(0)
                             }}
-
                         >kato</p>
                     </div>
                 </div>
@@ -90,6 +100,7 @@ const SidebarLayout = () => {
                             <span>{item.name}</span>
                         </button>
                     ))}
+                    <label htmlFor=""></label>
                     <select
                         className="mt-5 form-select appearance-none block w-full px-3 py-1.5 text-base font-normal text-white bg-gray-900 bg-clip-padding bg-no-repeat border border-solid border-gray-600 rounded transition ease-in-out m-0 focus:ring-2 focus:ring-purple-500 focus:border-purple-500 outline-none"
                         aria-label="Default select example"
@@ -101,8 +112,8 @@ const SidebarLayout = () => {
                         <option className="bg-gray-900 text-white" value="Medium">Medium</option>
                         <option className="bg-gray-900 text-white" value="Low">Low</option>
                     </select>
-                    <select name="" id="" className="mt-5 form-select appearance-none block w-full px-3 py-1.5 text-base font-normal text-white bg-gray-900 bg-clip-padding bg-no-repeat border border-solid border-gray-600 rounded transition ease-in-out m-0 focus:ring-2 focus:ring-purple-500 focus:border-purple-500 outline-none">
-                        <option className="bg-gray-900 text-white" defaultValue>Select Status</option>
+                    <select name="" id="" onChange={(e) => { handleStatus(e) }} className="mt-5 form-select appearance-none block w-full px-3 py-1.5 text-base font-normal text-white bg-gray-900 bg-clip-padding bg-no-repeat border border-solid border-gray-600 rounded transition ease-in-out m-0 focus:ring-2 focus:ring-purple-500 focus:border-purple-500 outline-none">
+                        <option className="bg-gray-900 text-white" disabled defaultValue>Select Status</option>
                         <option className="bg-gray-900 text-white" value="All">All</option>
                         <option className="bg-gray-900 text-white" value="Completed">Completed</option>
                         <option className="bg-gray-900 text-white" value="Incompleted">Incompleted</option>
