@@ -98,7 +98,7 @@ const Modal = () => {
                             Your message
                         </label>
                         <textarea
-                            maxlength="100"
+                            maxLength="100"
                             value={des}
                             onChange={handleDes}
                             id="message"

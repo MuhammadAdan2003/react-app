@@ -22,20 +22,13 @@ const SidebarLayout = () => {
     },
         [isModalOpen]);
 
-
     const handlePriority = (e) => {
         setcheck(e.target.value)
-    }
-
-    const handleLog = (e) => {
-        console.log();
-
     }
 
     const handleStatus = (e) => {
         setstatusTask(e.target.value);
     };
-
 
     const handleCompleted = (e) => {
         let complete = filteredTodos.filter(item => item.isCompleted === false);
