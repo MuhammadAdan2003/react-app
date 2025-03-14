@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect, useContext } from "react";
+import { useRef, useEffect, useContext } from "react";
 import UserContext from './components/UserContext';
 import Modal from "./components/modal"
 const SidebarLayout = () => {
@@ -58,7 +58,6 @@ const SidebarLayout = () => {
                 <a href="#" className="text-white flex items-center space-x-2 px-4">
                     <span className="text-2xl font-extrabold">Todo app</span>
                 </a>
-
                 <nav>
                     {[
                         { name: "Add new task", icon: "M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6", action: () => setIsModalOpen(true) },
@@ -75,6 +74,7 @@ const SidebarLayout = () => {
                             <span>{item.name}</span>
                         </button>
                     ))}
+
                     <div className="form-group mt-5">
                         <label className="mt-5" htmlFor="">Select By Priority</label>
                         <select
@@ -89,6 +89,7 @@ const SidebarLayout = () => {
                             <option className="bg-gray-900 text-white" value="Low">Low</option>
                         </select>
                     </div>
+
                     <div className="form-group mt-5">
                         <label htmlFor="">Select By Status</label>
                         <select name="" id="" onChange={(e) => { handleStatus(e) }} className=" form-select appearance-none block w-full px-3 py-1.5 text-base font-normal text-white bg-gray-900 bg-clip-padding bg-no-repeat border border-solid border-gray-600 rounded transition ease-in-out m-0 focus:ring-2 focus:ring-purple-500 focus:border-purple-500 outline-none">
@@ -98,6 +99,7 @@ const SidebarLayout = () => {
                             <option className="bg-gray-900 text-white" value="Incompleted">Incompleted</option>
                         </select>
                     </div>
+
                     <button onClick={(e) => { handleCompleted(e) }} className="bg-purple-500 text-white px-4 mt-5 rounded-md hover:bg-purple-600 transition">
                         Clear completed tasks
                     </button>
