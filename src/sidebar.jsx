@@ -3,7 +3,7 @@ import UserContext from './components/UserContext';
 import Modal from "./components/modal"
 const SidebarLayout = () => {
     const modalRef = useRef(null);
-    const { isModalOpen, setIsModalOpen, isOpen, setIsOpen, setcheck, setstatusTask, } = useContext(UserContext);
+    const { isModalOpen, setIsModalOpen, isOpen, setIsOpen, setcheck, setstatusTask, Completed, setCompleted, filteredTodos, setFilteredTodos } = useContext(UserContext);
 
     useEffect(() => {
         function handleClickOutside(event) {
@@ -34,6 +34,14 @@ const SidebarLayout = () => {
 
     const handleStatus = (e) => {
         setstatusTask(e.target.value);
+    };
+
+
+    const handleCompleted = (e) => {
+        let complete = filteredTodos.filter(item => item.isCompleted === false);
+        setFilteredTodos(complete);
+        localStorage.setItem("todos", JSON.stringify(complete));
+        window.dispatchEvent(new Event("storage"));
     };
 
     return (
@@ -97,6 +105,9 @@ const SidebarLayout = () => {
                             <option className="bg-gray-900 text-white" value="Incompleted">Incompleted</option>
                         </select>
                     </div>
+                    <button onClick={(e) => { handleCompleted(e) }} className="bg-purple-500 text-white px-4 mt-5 rounded-md hover:bg-purple-600 transition">
+                        Clear completed tasks
+                    </button>
                 </nav>
             </div>
             <Modal />

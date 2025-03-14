@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import UserContext from './UserContext';
 
 const UserProvider = ({ children }) => {
+    const [Completed, setCompleted] = useState(false)
     const [statusTask, setstatusTask] = useState("")
     const [check, setcheck] = useState("")
     const [filteredTodos, setFilteredTodos] = useState([]);
@@ -51,7 +52,9 @@ const UserProvider = ({ children }) => {
             filteredTodos,
             setFilteredTodos,
             local,
-            setLocal
+            setLocal,
+            Completed,
+            setCompleted
         }}>
             {children}
             {/* <App /> */}

@@ -18,7 +18,9 @@ const Single = () => {
         setFilteredTodos,
         statusTask,
         local,
-        setLocal } = useContext(UserContext);
+        setLocal,
+        Completed,
+        setCompleted } = useContext(UserContext);
 
     useEffect(() => {
         localStorage.setItem("todos", JSON.stringify(local));
@@ -66,6 +68,7 @@ const Single = () => {
     }, [statusTask, check, local]);
 
     const Taskstatus = (e) => {
+        setCompleted(false)
         const updatedTodos = filteredTodos.map(item =>
             item.id === e.target.id ? { ...item, isCompleted: !item.isCompleted } : item
         );
