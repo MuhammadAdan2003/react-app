@@ -19,7 +19,11 @@ const Modal = () => {
         editID,
         seteditID,
         matched,
-        setmatched
+        setmatched,
+        dateVal,
+        setDateVal,
+        checkDate,
+        setCheckDate
     } = useContext(UserProvider);
 
     const handleDes = (e) => {
@@ -38,6 +42,34 @@ const Modal = () => {
         setTodo(e.target.value);
     };
 
+    const handleDate = (e) => {
+        const now = new Date()
+        const myDate = new Date(e.target.value)
+        
+        if (myDate < now) {
+            setCheckDate(false)
+            console.log("past");
+            alert("cant add past date")
+            setDateVal("")
+            return;
+        }
+
+        else if (myDate == now) {
+            console.log("now");
+        }
+
+        else {
+            setCheckDate(true)
+            console.log("future");
+            setDateVal(e.target.value)
+        }
+
+    }
+
+    useEffect(() => {
+        console.log(checkDate);
+    }, [checkDate])
+
     const handleAdd = () => {
         if (todo === "" || priority === "") {
             alert("Task cannot be empty");
@@ -46,12 +78,12 @@ const Modal = () => {
 
         const newTodos = todos.map(task =>
             task.id === matched
-                ? { ...task, todo, priority, description: des }
+                ? { ...task, todo, priority, description: des, date: dateVal }
                 : task
         );
 
         if (!todos.some(task => task.id === matched)) {
-            newTodos.push({ id: uuidv4(), todo, isCompleted: false, priority, description: des });
+            newTodos.push({ id: uuidv4(), todo, isCompleted: false, priority, description: des, date: dateVal });
         }
 
         setTodos(newTodos);
@@ -70,6 +102,7 @@ const Modal = () => {
         setPriority("");
         setdes("");
     };
+
 
     return (
         <>
@@ -106,7 +139,16 @@ const Modal = () => {
                             className="w-full p-3 rounded-md bg-gray-900 text-white placeholder-gray-400 border border-gray-700 focus:ring-2 focus:ring-purple-500 focus:border-purple-500 outline-none"
                             placeholder="Enter up to 100 words..."
                         ></textarea>
-
+                        <div className="flex flex-col">
+                            <label className="text-white" htmlFor="">Due Date & Time</label>
+                            <input
+                                type="datetime-local"
+                                value={dateVal}
+                                onChange={(e) => { handleDate(e) }}
+                                id="date"
+                                className="mt-2 cursor-pointer rounded p-2 bg-gray-900 text-white border border-gray-600 focus:outline-none focus:ring-2 focus:ring-purple-500"
+                            />
+                        </div>
                         <SelectDropdown onChange={handlePriority} />
                         <div className="mt-4 flex justify-end space-x-2">
                             <button

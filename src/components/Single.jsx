@@ -89,6 +89,7 @@ const Single = () => {
                     >
                         <div>
                             <div className="flex justify-between items-center">
+                                {/* <p className="text-sm text-red-500">This task is now overdue.</p> */}
                                 <h2 className="text-xl font-semibold mb-2 text-gray-100">
                                     {item.todo}
                                 </h2>
@@ -128,6 +129,7 @@ const Single = () => {
                         </div>
                         <p className="mt-5 flex gap-2 items-center"><input onChange={(e) => { Taskstatus(e) }} checked={item.isCompleted} id={item.id} className="h-5 w-5" type="checkbox" /><span className={`text-[12px] text-white text-xs font-[10px] px-3 py-1 rounded-full
                             ${item.isCompleted ? "bg-[#00c95187]" : "bg-[#ff0523bf]"}`}>{item.isCompleted ? "Completed" : "Incompleted"}</span></p>
+                        <p className="mt-4">Due Date: {item.date}</p>
                     </div>
                 ))
             ) : (
