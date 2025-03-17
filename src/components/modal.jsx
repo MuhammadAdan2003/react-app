@@ -23,7 +23,13 @@ const Modal = () => {
         dateVal,
         setDateVal,
         checkDate,
-        setCheckDate
+        setCheckDate,
+        currDate,
+        setCurrDate,
+        Taskdate,
+        setTaskDate,
+        local,
+        setLocal,
     } = useContext(UserProvider);
 
     const handleDes = (e) => {
@@ -45,12 +51,15 @@ const Modal = () => {
     const handleDate = (e) => {
         const now = new Date()
         const myDate = new Date(e.target.value)
-        
+
+        setCurrDate(now)
+        setTaskDate(myDate)
+
         if (myDate < now) {
-            setCheckDate(false)
+            setCheckDate(false);
             console.log("past");
-            alert("cant add past date")
-            setDateVal("")
+            alert("cant add past date");
+            setDateVal("");
             return;
         }
 
@@ -70,6 +79,21 @@ const Modal = () => {
         console.log(checkDate);
     }, [checkDate])
 
+
+    // useEffect(() => {
+    //     const interval = setInterval(() => {
+    //         local.forEach((item) => {
+    //             if (new Date() > currDate) {
+    //                 console.log(`"${item.todo}" is overdue!`);
+    //             }
+    //         });
+    //     }, 1000);
+
+    //     return () => clearInterval(interval);
+    // }, [currDate, local]);
+
+
+
     const handleAdd = () => {
         if (todo === "" || priority === "") {
             alert("Task cannot be empty");
@@ -78,12 +102,12 @@ const Modal = () => {
 
         const newTodos = todos.map(task =>
             task.id === matched
-                ? { ...task, todo, priority, description: des, date: dateVal }
+                ? { ...task, todo, priority, description: des, date: dateVal, dateStatus: checkDate }
                 : task
         );
 
         if (!todos.some(task => task.id === matched)) {
-            newTodos.push({ id: uuidv4(), todo, isCompleted: false, priority, description: des, date: dateVal });
+            newTodos.push({ id: uuidv4(), todo, isCompleted: false, priority, description: des, date: dateVal, dateStatus: checkDate });
         }
 
         setTodos(newTodos);

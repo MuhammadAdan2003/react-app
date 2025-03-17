@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 import UserContext from './UserContext';
 
 const UserProvider = ({ children }) => {
+    const [currDate, setCurrDate] = useState("")
+    const [Taskdate, setTaskDate] = useState("")
     const [checkDate, setCheckDate] = useState(false)
-    const [date, setDate] = useState("")
     const [dateVal, setDateVal] = useState("")
     const [Completed, setCompleted] = useState(false)
     const [statusTask, setstatusTask] = useState("")
@@ -60,10 +61,12 @@ const UserProvider = ({ children }) => {
             setCompleted,
             dateVal,
             setDateVal,
-            date,
-            setDate,
+            Taskdate,
+            setTaskDate,
             checkDate,
-            setCheckDate
+            setCheckDate,
+            currDate,
+            setCurrDate
         }}>
             {children}
             {/* <App /> */}
