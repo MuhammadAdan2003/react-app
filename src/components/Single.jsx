@@ -134,7 +134,7 @@ const Single = () => {
                 ))
             ) : (
                 <p className="col-span-3 text-center text-gray-400 text-lg">
-                    {check !== "" ? `No todos available for ${check} priority` : "No todos available"}
+                    No Tasks available
                 </p>
             )}
             <Modal />
